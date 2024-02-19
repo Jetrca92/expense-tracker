@@ -1,26 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<div class="container">
+		<HeaderComponent />
+		<HistoryComponent />
+		<AddTransactionForm />
+	</div>
+
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+import HeaderComponent from './components/HeaderComponent.vue'
+import HistoryComponent from './components/HistoryComponent.vue'
+import AddTransactionForm from './components/AddTransactionForm.vue'
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+	background-color: whitesmoke;
+}
+
+.container{
+        max-width: 770px;
 }
 </style>
