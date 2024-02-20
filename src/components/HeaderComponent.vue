@@ -38,7 +38,6 @@ const props = defineProps({
 <style>
 .expense-tracker {
     text-align: center;
-    margin: 20px auto;
     padding: 20px;
 }
   

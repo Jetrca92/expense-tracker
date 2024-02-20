@@ -13,14 +13,21 @@ const userExpense = ref(0)
 // Work in progress
 const addNewTransaction = (transactionText, transactionAmount) => {
 	transactionsList.value.push({ text: transactionText, amount: transactionAmount })
-	if (transactionAmount > 0) {
-		userIncome.value += transactionAmount
-		
-	} else {
-		userExpense.value += transactionAmount
-	}
-	userBalance.value += transactionAmount
+	updateUserBalance(transactionAmount, true)
 }
+const deleteTransaction = (index) => {
+	updateUserBalance(transactionsList.value[index].amount)
+	const updatedTransactionsList = transactionsList.value.filter((item, i) => i !== index);
+    transactionsList.value = updatedTransactionsList;
+}
+const updateUserBalance = (transactionAmount, isAddingTransaction) => {
+	if (transactionAmount > 0) {
+		userIncome.value += isAddingTransaction ? transactionAmount : -transactionAmount
+	} else {
+		userExpense.value += isAddingTransaction ? -transactionAmount : +transactionAmount
+	}
+    userBalance.value += isAddingTransaction ? transactionAmount : -transactionAmount
+};
 </script>
 
 <template>
@@ -32,6 +39,7 @@ const addNewTransaction = (transactionText, transactionAmount) => {
 		/>
 		<HistoryComponent 
 			:transactionsList="transactionsList"
+			:deleteTransaction="deleteTransaction"
 		/>
 		<AddTransactionForm 
 			:addNewTransaction="addNewTransaction"
@@ -41,11 +49,11 @@ const addNewTransaction = (transactionText, transactionAmount) => {
 </template>
 
 <style>
-#app {
-	background-color: whitesmoke;
-}
 
 .container{
     max-width: 770px;
+	background-color: whitesmoke; 
+    border: 1px solid #ccc;
+    padding: 20px;
 }
 </style>
