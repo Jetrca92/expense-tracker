@@ -1,3 +1,12 @@
+<script setup>
+import { ref, defineProps } from 'vue'
+
+const props = defineProps({
+    addNewTransaction: Function,
+})
+const transactionText = ref('')
+const transactionAmount = ref(0)
+</script>
 <template>
     <div class="mb-3">
         <div class="text-center">
@@ -6,18 +15,29 @@
         </div>
         <form>
         <div class="mb-3">
-            <label for="text" class="form-label">Text</label>
-            <input type="text" class="form-control" id="text">
+            <label for="transaction-text" class="form-label">Text</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="transaction-text"
+                v-model="transactionText"
+            >
         </div>
         <div class="mb-3">
-            <label for="amount" class="form-label">Amount</label>
-            <input type="number" class="form-control" id="number">
-            <div id="numberHelp" class="form-text">negative - expense, positive - income</div>
+            <label for="transactionAmount" class="form-label">Amount</label>
+            <input 
+                type="number" 
+                class="form-control" 
+                id="transaction-amount"
+                v-model="transactionAmount"
+            >
+            <div id="numberHelp" class="form-text">(negative - expense, positive - income)</div>
         </div>
-        <button type="submit" class="btn btn-primary">Add transaction</button>
+        <button 
+            class="btn btn-primary"
+            @click.prevent="props.addNewTransaction(transactionText, transactionAmount)"
+        >Add transaction</button>
         </form>
     </div>
 </template>
   
-<script setup>
-</script>

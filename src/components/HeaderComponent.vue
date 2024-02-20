@@ -1,15 +1,24 @@
+<script setup>
+import { defineProps } from 'vue'
+const props = defineProps({
+    userBalance: Number,
+    userIncome: Number,
+    userExpense: Number,
+})
+</script>
+
 <template>
     <div class="expense-tracker">
         <h1 class="title">Expense Tracker</h1>
         <h2 class="subtitle">YOUR BALANCE</h2>
-        <h1 class="balance positive">500 €</h1>
+        <h1 class="balance positive mb-3">{{ props.userBalance }} €</h1>
     
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">INCOME</h5>
-                        <h1 class="positive">+ 500 €</h1>
+                        <h2 class="positive">+ {{ props.userIncome }} €</h2>
                     
                     </div>
                 </div>
@@ -18,16 +27,13 @@
                 <div class="card">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">EXPENSE</h5>
-                        <h1 class="negative">- 290 €</h1>                
+                        <h2 class="negative">- {{ props.userExpense }} €</h2>                
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
-<script setup>
-</script>
   
 <style>
 .expense-tracker {
